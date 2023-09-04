@@ -19,6 +19,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin'], function () {
     Route::resource('testimonials', Admin\TestimonialController::class);
     Route::resource('subscribers', Admin\SubscriberController::class);
     Route::resource('social_links', Admin\SocialLinkController::class);
+    Route::resource('news_categories', Admin\NewsCategoryController::class);
 
     // Settings
     Route::group(['as' => 'settings.', 'prefix' => 'settings'], function () {
