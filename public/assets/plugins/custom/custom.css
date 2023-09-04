@@ -1,0 +1,18 @@
+.jconfirm-title-c .bx {
+    font-size: 3.5rem;
+}
+
+.image-preview {
+    display: block;
+    width: 100%;
+    height: 115px;
+    border: 3px rgb(222, 216, 216) dotted;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 576px) {
+    .page-item .page-link {
+        border-radius: 50%;
+    }
+}
