@@ -196,7 +196,7 @@
 
         <li class="menu-item {{ Route::is('admin.news_categories.index') ? 'active' :'' }}">
             <a href="{{ route('admin.news_categories.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bxs-like"></i>
+                <i class="menu-icon tf-icons bx bx-news"></i>
                 <div>{{ __('News Category') }}</div>
             </a>
         </li>
