@@ -2,20 +2,23 @@
 
 namespace App\Models;
 
-use App\Models\SubNewsCategory;
+use App\Models\NewsCategory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class NewsCategory extends Model
+class SubNewsCategory extends Model
 {
     use HasFactory;
 
     protected $fillable = [
+        'news_categories_id',
         'name',
         'status',
     ];
 
-    public function NewsCategory(){
-        return $this->hasOne(SubNewsCategory::class);
+
+    public function SubNews(){
+        return $this->belongsTo(NewsCategory::class);
     }
+
 }

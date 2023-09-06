@@ -20,6 +20,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin'], function () {
     Route::resource('subscribers', Admin\SubscriberController::class);
     Route::resource('social_links', Admin\SocialLinkController::class);
     Route::resource('news_categories', Admin\NewsCategoryController::class);
+    Route::resource('sub_news_categories', Admin\SubNewsCategoryController::class);
 
     // Settings
     Route::group(['as' => 'settings.', 'prefix' => 'settings'], function () {
