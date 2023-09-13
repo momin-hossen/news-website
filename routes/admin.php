@@ -22,6 +22,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin'], function () {
     Route::resource('news_categories', Admin\NewsCategoryController::class);
     Route::resource('sub_news_categories', Admin\SubNewsCategoryController::class);
     Route::resource('news', Admin\NewsController::class);
+    Route::resource('reporters', Admin\NewsReporterController::class);
 
     // Settings
     Route::group(['as' => 'settings.', 'prefix' => 'settings'], function () {

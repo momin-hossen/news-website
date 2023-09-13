@@ -42,6 +42,7 @@
         const description = $(this).data("description");
         const content = $(this).data("content");
         const review = $(this).data("review");
+        const email = $(this).data("email");
         const class_name = $(this).data("class_name");
         const link = $(this).data("link");
         $(".title").val(title);
@@ -52,6 +53,7 @@
         $(".description").val(description);
         $(".content").val(content);
         $(".review").val(review);
+        $(".email").val(email);
         $(".class_name").val(class_name);
         $(".link").val(link);
         $("#term-cat-modal").modal("show");
