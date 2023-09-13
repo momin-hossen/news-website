@@ -208,5 +208,12 @@
             </a>
         </li>
 
+        <li class="menu-item {{ Route::is('admin.news.index') ? 'active' :'' }}">
+            <a href="{{ route('admin.news.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-news"></i>
+                <div>{{ __('News') }}</div>
+            </a>
+        </li>
+
     </ul>
 </aside>

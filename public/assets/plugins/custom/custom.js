@@ -40,6 +40,7 @@
         const status = $(this).data("status");
         const date = $(this).data("date");
         const description = $(this).data("description");
+        const content = $(this).data("content");
         const review = $(this).data("review");
         const class_name = $(this).data("class_name");
         const link = $(this).data("link");
@@ -49,6 +50,7 @@
         $(".status").val(status);
         $(".date").val(date);
         $(".description").val(description);
+        $(".content").val(content);
         $(".review").val(review);
         $(".class_name").val(class_name);
         $(".link").val(link);

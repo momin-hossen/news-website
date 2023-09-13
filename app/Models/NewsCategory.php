@@ -16,6 +16,6 @@ class NewsCategory extends Model
     ];
 
     public function NewsCategory(){
-        return $this->hasOne(SubNewsCategory::class);
+        return $this->hasMany(SubNewsCategory::class);
     }
 }

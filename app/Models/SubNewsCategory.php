@@ -20,5 +20,4 @@ class SubNewsCategory extends Model
     public function SubNews(){
         return $this->belongsTo(NewsCategory::class);
     }
-
 }
