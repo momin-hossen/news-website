@@ -222,5 +222,12 @@
             </a>
         </li>
 
+        <li class="menu-item {{ Route::is('admin.specialties.index') ? 'active' :'' }}">
+            <a href="{{ route('admin.specialties.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-report"></i>
+                <div>{{ __('News Specialty') }}</div>
+            </a>
+        </li>
+
     </ul>
 </aside>
