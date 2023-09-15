@@ -17,12 +17,12 @@ class SubNewsCategoryController extends Controller
         $sub_news_categories = SubNewsCategory::when(request('search'), function($q) {
             $q->where('name', 'like', '%'.request('search').'%');
         })
-        ->with('SubNews')
+        ->with('NewsCategory')
         ->latest()
         ->paginate(2);
 
         // $sub_news_categories = SubNewsCategory::with('SubNews')->get();
-        $active_news_categories = NewsCategory::all();
+        $active_news_categories = NewsCategory::where("status", 1)->get();
 
         return view('admin.sub_news_categories.index', compact('sub_news_categories', 'active_news_categories'));
     }

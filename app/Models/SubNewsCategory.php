@@ -17,7 +17,7 @@ class SubNewsCategory extends Model
     ];
 
 
-    public function SubNews(){
-        return $this->belongsTo(NewsCategory::class);
+    public function NewsCategory() {
+        return $this->belongsTo(NewsCategory::class, 'news_categories_id');
     }
 }

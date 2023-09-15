@@ -91,7 +91,7 @@
                             @foreach ($sub_news_categories as $sub_news_category)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $sub_news_category->SubNews }}</td>
+                                    <td>{{ $sub_news_category->NewsCategory->name }}</td>
                                     <td>{{ $sub_news_category->name }}</td>
                                     <td><span class="badge rounded-pill bg-label-{{ $sub_news_category->status ? 'primary':'danger' }}">{{ $sub_news_category->status ? 'Active':'Deactive' }}</span></td>
                                     <td>

@@ -60,6 +60,16 @@
         $(".term-edit-form").attr("action", url);
     });
 
+    $(".tagline-modal").on("click", function () {
+        var name = $(this).data("name");
+        var status = $(this).data("status");
+        $(".name").val(name);
+        $(".status").val(status);
+        $("#tagline-modal").modal("show");
+        $(".tagline-edit-form").attr("action", url);
+    });
+
+
     $(".lang-edit-modal").on("click", function () {
         const url = $(this).data("url");
         const name = $(this).data("name");
