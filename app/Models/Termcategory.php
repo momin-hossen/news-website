@@ -28,4 +28,8 @@ class Termcategory extends Model
     {
         return $this->hasMany(Termcategory::class);
     }
+
+    public function category(){
+        return $this->hasMany(News::class);
+    }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.admin.app', [
     'title' => 'News List',
-    'buttons' => [['name' => 'Add new','link' => route('admin.news.create'), 'icon' => 'bx bx-plus-circle']],
+    'buttons' => [['name' => 'Add new', 'modal' => 'create-term-modal', 'icon' => 'bx bx-plus-circle']],
 ])
 
 @section('contents')
@@ -81,12 +81,8 @@
                         <thead class="table-light">
                             <tr>
                                 <th>#</th>
-                                <th>{{ __('Category') }}</th>
-                                <th>{{ __('title') }}</th>
-                                <th>{{ __('Image') }}</th>
-                                <th>{{ __('Description') }}</th>
-                                <th>{{ __('Is Breaking') }}</th>
-                                <th>{{ __('Status') }}</th>
+                                <th>{{ __('Title') }}</th>
+                                <th>{{ __('Content') }}</th>
                                 <th>{{ __('Actions') }}</th>
                             </tr>
                         </thead>
@@ -94,18 +90,8 @@
                             @foreach ($news as $article)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $article->category->title }}</td>
                                     <td>{{ $article->title }}</td>
-                                    <td>
-                                        <img width="35" height="35" class="rounded-circle" src="{{ asset($article->image ?? '') }}">
-                                    </td>
-                                    <td>{{ $article->description }}</td>
-                                    <td>
-                                        <span class="badge rounded-pill bg-label-{{ $article->is_breaking ? 'primary':'danger' }}">{{ $article->is_breaking ? 'true':'false' }}</span>
-                                    </td>
-                                    <td>
-                                        <span class="badge rounded-pill bg-label-{{ $article->status ? 'primary':'danger' }}">{{ $article->status ? 'Active':'Deactive' }}</span>
-                                    </td>
+                                    <td>{{ $article->content }}</td>
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -113,11 +99,16 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="{{ route('admin.news.edit', $article->id) }}">
+                                                <a class="dropdown-item term-cat-modal" data-id="{{ $article->id }}"
+                                                    data-url="{{ route('admin.news.update', $article->id) }}"
+                                                    data-title="{{ $article->title }}"
+                                                    data-content="{{ $article->content }}"
+                                                    href="javascript:void(0);">
                                                     <i class="bx bx-edit-alt me-1"></i>
-                                                    {{ __('Edit') }}
+                                                    Edit
                                                 </a>
-                                                <a class="dropdown-item delete-confirm" data-method="DELETE" href="{{ route('admin.news.destroy', $article->id) }}">
+                                                <a class="dropdown-item delete-confirm" data-method="DELETE"
+                                                    href="{{ route('admin.news.destroy', $article->id) }}">
                                                     <i class="bx bx-trash me-1"></i>
                                                     {{ __('Delete') }}
                                                 </a>
@@ -138,3 +129,72 @@
         </div>
     </div>
 @endsection
+
+@push('modal')
+    <div class="modal fade" id="create-term-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <form action="{{ route('admin.news.index') }}" method="post" class="custom-reload-form">
+                    @csrf
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel2">Create News</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <label for="title" class="form-label">Title</label>
+                                <input type="text" id="title" class="form-control" name="title" placeholder="Enter news title" required>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="content" class="form-label">Content</label>
+                                <textarea name="content" id="content" placeholder="Enter Content" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-primary ajax-btn">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="term-cat-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <form action="" method="post" class="custom-reload-form term-edit-form">
+                    @csrf
+                    @method('put')
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">News update</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 mb-3">
+                                <label for="title" class="form-label">Title</label>
+                                <input type="text" id="title" class="form-control title" name="title" placeholder="Enter news title" required>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="content" class="form-label">Content</label>
+                                <textarea name="content" id="content" placeholder="Enter Content" class="form-control content"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-primary ajax-btn">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endpush

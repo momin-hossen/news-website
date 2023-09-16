@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\News;
+use App\Helpers\HasUploader;
+use App\Models\Termcategory;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
+    use HasUploader;
     /**
      * Display a listing of the resource.
      */
@@ -27,7 +31,8 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //
+        $active_categories = Termcategory::all();
+        return view('admin.news.create', compact('active_categories'));
     }
 
     /**
@@ -36,11 +41,17 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'termcategory_id' => 'required',
             'title' => 'required|string|max:255',
-            'content' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'required',
+            'is_breaking' => 'required|integer',
+            'status' => 'required|integer',
         ]);
 
-        News::create($request->all());
+        News::create($request->except('image') + [
+            'image' => $this->upload($request, 'image')
+        ]);
 
         return response()->json([
             'message' => 'News created successfully.',
@@ -59,9 +70,10 @@ class NewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(News $news)
     {
-        //
+        $active_categories = Termcategory::all();
+        return view('admin.news.edit', compact('news', 'active_categories'));
     }
 
     /**
@@ -70,13 +82,19 @@ class NewsController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
+            'termcategory_id' => 'required',
             'title' => 'required|string|max:255',
-            'content' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'required',
+            'is_breaking' => 'required|integer',
+            'status' => 'required|integer',
         ]);
 
         $news = News::findOrFail($id);
 
-        $news->update($request->all());
+        $news->update($request->except('image') + [
+            'image' => $request->hasFile('image') ? $this->upload($request, 'image', $news->image) : $news->image
+        ]);
 
         return response()->json([
             'message' => 'News updated successfully.',
@@ -90,6 +108,9 @@ class NewsController extends Controller
     public function destroy(string $id)
     {
         $news = News::findOrFail($id);
+        if (file_exists($news->image ?? false)) {
+            Storage::delete($news->image);
+        }
         $news->delete();
         return response()->json([
             'message' => 'News deleted successfully.',

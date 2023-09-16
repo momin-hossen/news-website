@@ -10,7 +10,16 @@ class News extends Model
     use HasFactory;
 
     protected $fillable = [
+        'termcategory_id',
         'title',
-        'content',
+        'image',
+        'description',
+        'is_breaking',
+        'status',
     ];
+
+    public function category() {
+        return $this->belongsTo(Termcategory::class, 'termcategory_id');
+    }
 }
+
