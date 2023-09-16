@@ -69,6 +69,15 @@
         $(".tagline-edit-form").attr("action", url);
     });
 
+    $(".special-modal").on("click", function () {
+        var title = $(this).data("title");
+        var status = $(this).data("status");
+        $(".title").val(title);
+        $(".status").val(status);
+        $("#special-modal").modal("show");
+        $(".special-edit-form").attr("action", url);
+    });
+
 
     $(".lang-edit-modal").on("click", function () {
         const url = $(this).data("url");

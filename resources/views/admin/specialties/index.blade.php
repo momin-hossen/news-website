@@ -81,7 +81,8 @@
                         <thead class="table-light">
                             <tr>
                                 <th>#</th>
-                                <th>{{ __('Name') }}</th>
+                                <th>{{ __('Title') }}</th>
+                                <th>{{ __('Status') }}</th>
                                 <th>{{ __('Actions') }}</th>
                             </tr>
                         </thead>
@@ -89,7 +90,10 @@
                             @foreach ($specialties as $specialty)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $specialty->name }}</td>
+                                    <td>{{ $specialty->title }}</td>
+                                    <td>
+                                        <span class="badge rounded-pill bg-label-{{ $specialty->status ? 'primary':'danger' }}">{{ $specialty->status ? 'Active':'Deactive' }}</span>
+                                    </td>
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -97,9 +101,10 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item term-cat-modal" data-id="{{ $specialty->id }}"
+                                                <a class="dropdown-item special-modal" data-id="{{ $specialty->id }}"
                                                     data-url="{{ route('admin.specialties.update', $specialty->id) }}"
-                                                    data-name="{{ $specialty->name }}"
+                                                    data-title="{{ $specialty->title }}"
+                                                    data-status="{{ $specialty->status }}"
                                                     href="javascript:void(0);">
                                                     <i class="bx bx-edit-alt me-1"></i>
                                                     Edit
@@ -141,8 +146,15 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-12 mb-3">
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" id="name" class="form-control" name="name" placeholder="Enter news specialty name" required>
+                                <label for="title" class="form-label">Title</label>
+                                <input type="text" id="title" class="form-control" name="title" placeholder="Enter news specialty title" required>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="status" class="form-label">Status</label>
+                                <select name="status" id="status" class="form-control">
+                                    <option value="1">@lang('Active')</option>
+                                    <option value="0">@lang('Deactive')</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -157,10 +169,10 @@
         </div>
     </div>
 
-    <div class="modal fade" id="term-cat-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="special-modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
-                <form action="" method="post" class="custom-reload-form term-edit-form">
+                <form action="" method="post" class="custom-reload-form special-edit-form">
                     @csrf
                     @method('put')
 
@@ -171,8 +183,15 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-12 mb-3">
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" id="name" class="form-control name" name="name" required>
+                                <label for="title" class="form-label">Title</label>
+                                <input type="text" id="title" class="form-control title" name="title" required>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="status" class="form-label">Status</label>
+                                <select name="status" id="status" class="form-control status">
+                                    <option value="1">@lang('Active')</option>
+                                    <option value="0">@lang('Deactive')</option>
+                                </select>
                             </div>
                         </div>
                     </div>

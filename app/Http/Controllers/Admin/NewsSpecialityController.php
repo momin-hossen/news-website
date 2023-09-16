@@ -14,7 +14,7 @@ class NewsSpecialityController extends Controller
     public function index()
     {
         $specialties = NewsSpeciality::when(request('search'), function($q) {
-            $q->where('name', 'like', '%'.request('search').'%');
+            $q->where('title', 'like', '%'.request('search').'%');
         })
         ->latest()
         ->paginate(2);
@@ -36,7 +36,8 @@ class NewsSpecialityController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+            'status' => 'required|integer',
         ]);
 
         NewsSpeciality::create($request->all());
@@ -69,7 +70,8 @@ class NewsSpecialityController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+            'status' => 'required|integer',
         ]);
 
         $specialties = NewsSpeciality::findOrFail($id);

@@ -10,6 +10,7 @@ class NewsSpeciality extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'title',
+        'status',
     ];
 }
