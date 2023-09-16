@@ -82,6 +82,8 @@
                             <tr>
                                 <th>#</th>
                                 <th>{{ __('Name') }}</th>
+                                <th>{{ __('Slug') }}</th>
+                                <th>{{ __('Image') }}</th>
                                 <th>{{ __('Status') }}</th>
                                 <th>{{ __('Actions') }}</th>
                             </tr>
@@ -91,6 +93,8 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $news_category->name }}</td>
+                                    <td>{{ $news_category->slug }}</td>
+                                    <td><img width="35" height="35" class="rounded-circle" src="{{ asset($news_category->image ?? '') }}"></td>
                                     <td><span class="badge rounded-pill bg-label-{{ $news_category->status ? 'primary':'danger' }}">{{ $news_category->status ? 'Active':'Deactive' }}</span></td>
                                     <td>
                                         <div class="dropdown">
@@ -145,6 +149,16 @@
                                 <label for="name" class="form-label">Name</label>
                                 <input type="text" id="name" class="form-control" name="name" placeholder="Enter tagline name" required>
                             </div>
+                            <div class="col-12 text-center mb-3">
+                                <div class="preview-seo_image">
+                                    <label for="image" class="form-label text-start d-block">@lang('Image')</label>
+                                    <label for="image" class="image-preview">
+                                        <img width="60px" height="60px" class="mt-3" src="{{ asset('assets/img/icons/no-image.png') }}" alt="">
+                                        <p>{{ __('Please select an image.') }}</p>
+                                    </label>
+                                    <input class="form-control d-none image-input" type="file" id="image" name="image">
+                                </div>
+                            </div>
                             <div class="col-12 mb-3">
                                 <label for="status" class="form-label">Status</label>
                                 <select name="status" id="status" class="form-control">
@@ -181,6 +195,16 @@
                             <div class="col-12 mb-3">
                                 <label for="name" class="form-label">name</label>
                                 <input type="text" id="name" class="form-control name" name="name" required>
+                            </div>
+                            <div class="col-12 text-center mb-3">
+                                <div class="preview-seo_image">
+                                    <label for="image" class="form-label text-start d-block">@lang('Image')</label>
+                                    <label for="image" class="image-preview">
+                                        <img width="60px" height="60px" class="mt-3" src="{{ asset($news_category->image ?? 'assets/img/icons/no-image.png') }}" alt="">
+                                        <p>Please select an image.</p>
+                                    </label>
+                                    <input class="form-control d-none image-input" type="file" id="image" name="image">
+                                </div>
                             </div>
                             <div class="col-12 mb-3">
                                 <label for="status" class="form-label">Status</label>

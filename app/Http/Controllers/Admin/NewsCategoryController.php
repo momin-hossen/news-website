@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+use App\Helpers\HasUploader;
 use App\Models\NewsCategory;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class NewsCategoryController extends Controller
 {
+    use HasUploader;
     /**
      * Display a listing of the resource.
      */
@@ -37,10 +41,13 @@ class NewsCategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'status' => 'required',
         ]);
-
-        NewsCategory::create($request->all());
+        NewsCategory::create($request->except('image') + [
+            'slug' => Str::slug($request->name),
+            'image' => $this->upload($request, 'image'),
+        ]);
 
         return response()->json([
             'message' => 'News category created successfully.',
@@ -76,7 +83,12 @@ class NewsCategoryController extends Controller
 
         $news_categories = NewsCategory::findOrFail($id);
 
-        $news_categories->update($request->all());
+        $news_categories->update($request->except('image') + [
+            'slug' => Str::slug($request->name),
+            'image' => $request->hasFile('image') ? $this->upload($request, 'image', $news_categories->image) : $news_categories->image
+
+
+        ]);
 
         return response()->json([
             'message' => 'News Category updated successfully.',
@@ -89,7 +101,11 @@ class NewsCategoryController extends Controller
      */
     public function destroy(string $id)
     {
+
         $news_categories = NewsCategory::findOrFail($id);
+        if (file_exists($news_categories->image ?? false)) {
+            Storage::delete($news_categories->image);
+        }
         $news_categories->delete();
         return response()->json([
             'message' => 'News Category deleted successfully.',

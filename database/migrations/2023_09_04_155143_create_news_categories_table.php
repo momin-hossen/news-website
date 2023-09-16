@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('news_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug')->unique();
+            $table->string('image');
             $table->integer('status')->default(0);
             $table->timestamps();
         });
