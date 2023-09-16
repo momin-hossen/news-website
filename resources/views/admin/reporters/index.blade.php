@@ -1,6 +1,6 @@
 @extends('layouts.admin.app', [
     'title' => 'News Reporter List',
-    'buttons' => [['name' => 'Add new', 'modal' => 'create-term-modal', 'icon' => 'bx bx-plus-circle']],
+    'buttons' => [['name' => 'Add new','link' => route('admin.reporters.create'), 'icon' => 'bx bx-plus-circle']],
 ])
 
 @section('contents')
@@ -81,8 +81,17 @@
                         <thead class="table-light">
                             <tr>
                                 <th>#</th>
+                                <th>{{ __('Image') }}</th>
                                 <th>{{ __('Name') }}</th>
+                                <th>{{ __('Phone') }}</th>
                                 <th>{{ __('Email') }}</th>
+                                <th>{{ __('NID_NO') }}</th>
+                                <th>{{ __('Father_Name') }}</th>
+                                <th>{{ __('Mother_Name') }}</th>
+                                <th>{{ __('Present_Address') }}</th>
+                                <th>{{ __('Permanent_Address') }}</th>
+                                <th>{{ __('Joining_Date') }}</th>
+                                <th>{{ __('Role') }}</th>
                                 <th>{{ __('Actions') }}</th>
                             </tr>
                         </thead>
@@ -90,8 +99,21 @@
                             @foreach ($reporters as $reporter)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
+                                    <td>
+                                        <img width="35" height="35" class="rounded-circle" src="{{ asset($reporter->image ?? '') }}">
+                                    </td>
                                     <td>{{ $reporter->name }}</td>
+                                    <td>{{ $reporter->phone }}</td>
                                     <td>{{ $reporter->email }}</td>
+                                    <td>{{ $reporter->nid_no }}</td>
+                                    <td>{{ $reporter->father_name }}</td>
+                                    <td>{{ $reporter->mother_name }}</td>
+                                    <td>{{ $reporter->present_address }}</td>
+                                    <td>{{ $reporter->permanent_address }}</td>
+                                    <td>{{ $reporter->joining_date }}</td>
+                                    <td>
+                                        <span class="badge rounded-pill bg-label-{{ $reporter->role ? 'primary':'info' }}">{{ $reporter->role ? 'Reporter':'Admin' }}</span>
+                                    </td>
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -99,16 +121,11 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item term-cat-modal" data-id="{{ $reporter->id }}"
-                                                    data-url="{{ route('admin.reporters.update', $reporter->id) }}"
-                                                    data-name="{{ $reporter->name }}"
-                                                    data-email="{{ $reporter->email }}"
-                                                    href="javascript:void(0);">
+                                                <a class="dropdown-item" href="{{ route('admin.reporters.edit', $reporter->id) }}">
                                                     <i class="bx bx-edit-alt me-1"></i>
-                                                    Edit
+                                                    {{ __('Edit') }}
                                                 </a>
-                                                <a class="dropdown-item delete-confirm" data-method="DELETE"
-                                                    href="{{ route('admin.reporters.destroy', $reporter->id) }}">
+                                                <a class="dropdown-item delete-confirm" data-method="DELETE" href="{{ route('admin.reporters.destroy', $reporter->id) }}">
                                                     <i class="bx bx-trash me-1"></i>
                                                     {{ __('Delete') }}
                                                 </a>
@@ -129,72 +146,3 @@
         </div>
     </div>
 @endsection
-
-@push('modal')
-    <div class="modal fade" id="create-term-modal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <form action="{{ route('admin.reporters.index') }}" method="post" class="custom-reload-form">
-                    @csrf
-
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel2">Create News Reporter</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-12 mb-3">
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" id="name" class="form-control" name="name" placeholder="Enter news reporter name" required>
-                            </div>
-                            <div class="col-12 mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" id="email" class="form-control" name="email" placeholder="Enter news reporter email" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                            Close
-                        </button>
-                        <button type="submit" class="btn btn-primary ajax-btn">Save</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="term-cat-modal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <form action="" method="post" class="custom-reload-form term-edit-form">
-                    @csrf
-                    @method('put')
-
-                    <div class="modal-header">
-                        <h5 class="modal-title">News Reporter Update</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-12 mb-3">
-                                <label for="name" class="form-label">Title</label>
-                                <input type="text" id="name" class="form-control name" name="name" required>
-                            </div>
-                            <div class="col-12 mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" id="email" class="form-control email" name="email" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                            Close
-                        </button>
-                        <button type="submit" class="btn btn-primary ajax-btn">Save changes</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-@endpush

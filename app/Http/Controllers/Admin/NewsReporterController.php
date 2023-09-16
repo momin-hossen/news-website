@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Helpers\HasUploader;
 use App\Models\NewsReporter;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class NewsReporterController extends Controller
 {
+    use HasUploader;
     /**
      * Display a listing of the resource.
      */
@@ -27,7 +30,7 @@ class NewsReporterController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.reporters.create');
     }
 
     /**
@@ -37,10 +40,21 @@ class NewsReporterController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email',
+            'phone' => 'required|string|max:20',
+            'email' => 'required|string|email|max:255|unique:reporters',
+            'nid_no' => 'required|string|max:255|unique:reporters',
+            'father_name' => 'required|string|max:255',
+            'mother_name' => 'required|string|max:255',
+            'present_address' => 'required|string',
+            'permanent_address' => 'required|string',
+            'joining_date' => 'required|date',
+            'password' => 'required|string|min:8',
+            'role' => 'required|integer',
         ]);
 
-        NewsReporter::create($request->all());
+        NewsReporter::create($request->except('image') + [
+            'image' => $this->upload($request, 'image')
+        ]);
 
         return response()->json([
             'message' => 'News Reporter created successfully.',
@@ -59,9 +73,9 @@ class NewsReporterController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(NewsReporter $reporter)
     {
-        //
+        return view('admin.reporters.edit', compact('reporter'));
     }
 
     /**
@@ -71,12 +85,24 @@ class NewsReporterController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email',
+            'phone' => 'required|string|max:20',
+            'email' => 'required|string|email|max:255|unique:reporters',
+            'nid_no' => 'required|string|max:255|unique:reporters',
+            'father_name' => 'required|string|max:255',
+            'mother_name' => 'required|string|max:255',
+            'present_address' => 'required|string',
+            'permanent_address' => 'required|string',
+            'joining_date' => 'required|date',
+            'password' => 'required|string|min:8',
+            'role' => 'required|integer',
         ]);
 
         $reporters = NewsReporter::findOrFail($id);
 
-        $reporters->update($request->all());
+        $reporters->update($request->except('image') + [
+            'image' => $request->hasFile('image') ? $this->upload($request, 'image', $reporters->image) : $reporters->image
+        ]);
+
 
         return response()->json([
             'message' => 'News Reporter updated successfully.',
@@ -90,6 +116,9 @@ class NewsReporterController extends Controller
     public function destroy(string $id)
     {
         $reporters = NewsReporter::findOrFail($id);
+        if (file_exists($reporters->image ?? false)) {
+            Storage::delete($reporters->image);
+        }
         $reporters->delete();
         return response()->json([
             'message' => 'News Reporter deleted successfully.',

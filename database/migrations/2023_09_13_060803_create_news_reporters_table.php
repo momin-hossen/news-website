@@ -13,8 +13,18 @@ return new class extends Migration
     {
         Schema::create('news_reporters', function (Blueprint $table) {
             $table->id();
+            $table->string('image');
             $table->string('name');
+            $table->string('phone');
             $table->string('email')->unique();
+            $table->string('nid_no')->unique();
+            $table->string('father_name');
+            $table->string('mother_name');
+            $table->text('present_address');
+            $table->text('permanent_address');
+            $table->date('joining_date');
+            $table->string('password');
+            $table->integer('role')->default(1);
             $table->timestamps();
         });
     }
