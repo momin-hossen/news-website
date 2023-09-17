@@ -61,6 +61,15 @@
     });
 
 
+    $(".service-modal").on("click", function () {
+        var name = $(this).data("name");
+        var status = $(this).data("status");
+        $(".name").val(name);
+        $(".status").val(status);
+        $("#service-modal").modal("show");
+        $(".service-edit-form").attr("action", url);
+    });
+
     $(".portfolio-modal").on("click", function () {
         var title = $(this).data("title");
         var status = $(this).data("status");
