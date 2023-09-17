@@ -35,25 +35,11 @@
     $(".term-cat-modal").on("click", function () {
         const url = $(this).data("url");
         const title = $(this).data("title");
-        const name = $(this).data("name");
-        const percent = $(this).data("percent");
         const status = $(this).data("status");
-        const date = $(this).data("date");
-        const description = $(this).data("description");
-        const content = $(this).data("content");
-        const review = $(this).data("review");
-        const email = $(this).data("email");
         const class_name = $(this).data("class_name");
         const link = $(this).data("link");
         $(".title").val(title);
-        $(".name").val(name);
-        $(".percent").val(percent);
         $(".status").val(status);
-        $(".date").val(date);
-        $(".description").val(description);
-        $(".content").val(content);
-        $(".review").val(review);
-        $(".email").val(email);
         $(".class_name").val(class_name);
         $(".link").val(link);
         $("#term-cat-modal").modal("show");
