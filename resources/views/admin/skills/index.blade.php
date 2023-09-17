@@ -105,7 +105,7 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item term-cat-modal" data-id="{{ $skill->id }}"
+                                                <a class="dropdown-item skill-modal" data-id="{{ $skill->id }}"
                                                     data-url="{{ route('admin.skills.update', $skill->id) }}"
                                                     data-name="{{ $skill->name }}" data-percent="{{ $skill->percent }}" data-status="{{ $skill->status }}" href="javascript:void(0);">
                                                     <i class="bx bx-edit-alt me-1"></i>
@@ -175,10 +175,10 @@
         </div>
     </div>
 
-    <div class="modal fade" id="term-cat-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="skill-modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
-                <form action="" method="post" class="custom-reload-form term-edit-form">
+                <form action="" method="post" class="custom-reload-form skill-edit-form">
                     @csrf
                     @method('put')
 

@@ -61,6 +61,17 @@
     });
 
 
+    $(".skill-modal").on("click", function () {
+        var name = $(this).data("name");
+        var percent = $(this).data("percent");
+        var status = $(this).data("status");
+        $(".name").val(name);
+        $(".percent").val(percent);
+        $(".status").val(status);
+        $("#skill-modal").modal("show");
+        $(".skill-edit-form").attr("action", url);
+    });
+
     $(".service-modal").on("click", function () {
         var name = $(this).data("name");
         var status = $(this).data("status");
