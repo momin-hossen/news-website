@@ -61,6 +61,16 @@
     });
 
 
+    $(".news-cat-modal").on("click", function () {
+        var name = $(this).data("name");
+        var status = $(this).data("status");
+        $(".name").val(name);
+        $(".status").val(status);
+        $("#news-cat-modal").modal("show");
+        $(".news-cat-edit-form").attr("action", url);
+    });
+
+
     $(".experiences-modal").on("click", function () {
         var title = $(this).data("title");
         var date = $(this).data("date");
