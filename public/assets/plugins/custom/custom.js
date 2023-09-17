@@ -60,6 +60,20 @@
         $(".term-edit-form").attr("action", url);
     });
 
+
+    $(".experiences-modal").on("click", function () {
+        var title = $(this).data("title");
+        var date = $(this).data("date");
+        var status = $(this).data("status");
+        var description = $(this).data("description");
+        $(".title").val(title);
+        $(".date").val(date);
+        $(".status").val(status);
+        $(".description").val(description);
+        $("#experiences-modal").modal("show");
+        $(".experiences-edit-form").attr("action", url);
+    });
+
     $(".tagline-modal").on("click", function () {
         var name = $(this).data("name");
         var status = $(this).data("status");

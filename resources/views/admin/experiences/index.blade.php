@@ -103,7 +103,7 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item term-cat-modal" data-id="{{ $experience->id }}"
+                                                <a class="dropdown-item experiences-modal" data-id="{{ $experience->id }}"
                                                     data-url="{{ route('admin.experiences.update', $experience->id) }}"
                                                     data-title="{{ $experience->title }}" data-date="{{ $experience->date }}"
                                                     data-status="{{ $experience->status }}"
@@ -180,10 +180,10 @@
         </div>
     </div>
 
-    <div class="modal fade" id="term-cat-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="experiences-modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
-                <form action="" method="post" class="custom-reload-form term-edit-form">
+                <form action="" method="post" class="custom-reload-form experiences-edit-form">
                     @csrf
                     @method('put')
 
