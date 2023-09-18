@@ -236,5 +236,12 @@
             </a>
         </li>
 
+        <li class="menu-item {{ Route::is('admin.social_shares.index') ? 'active' :'' }}">
+            <a href="{{ route('admin.social_shares.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-share-alt"></i>
+                <div>{{ __('Social Share') }}</div>
+            </a>
+        </li>
+
     </ul>
 </aside>
