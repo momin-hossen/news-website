@@ -229,5 +229,12 @@
             </a>
         </li>
 
+        <li class="menu-item {{ Route::is('admin.company_settings.index') ? 'active' :'' }}">
+            <a href="{{ route('admin.company_settings.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-cog"></i>
+                <div>{{ __('Company Setting') }}</div>
+            </a>
+        </li>
+
     </ul>
 </aside>
