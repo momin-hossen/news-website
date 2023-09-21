@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             TermSeeder::class,
             OptionSeeder::class,
             LanguageSeeder::class,
+            Tagline::class,
         ]);
     }
 }
