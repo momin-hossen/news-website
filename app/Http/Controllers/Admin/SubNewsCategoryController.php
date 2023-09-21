@@ -74,19 +74,19 @@ class SubNewsCategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'status' => 'required',
-        // ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'status' => 'required',
+        ]);
 
-        // $sub_news_categories = SubNewsCategory::findOrFail($id);
+        $sub_news_categories = SubNewsCategory::findOrFail($id);
 
-        // $sub_news_categories->update($request->all());
+        $sub_news_categories->update($request->all());
 
-        // return response()->json([
-        //     'message' => 'Sub News Category updated successfully.',
-        //     'redirect' => route('admin.sub_news_categories.index')
-        // ]);
+        return response()->json([
+            'message' => 'Sub News Category updated successfully.',
+            'redirect' => route('admin.sub_news_categories.index')
+        ]);
     }
 
     /**
@@ -94,6 +94,11 @@ class SubNewsCategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $sub_news_categories = SubNewsCategory::findOrFail($id);
+        $sub_news_categories->delete();
+        return response()->json([
+            'message' => 'Sub news category deleted successfully.',
+            'redirect' => route('admin.sub_news_categories.index')
+        ]);
     }
 }

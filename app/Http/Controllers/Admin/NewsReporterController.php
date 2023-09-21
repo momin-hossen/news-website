@@ -41,8 +41,8 @@ class NewsReporterController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
-            'email' => 'required|string|email|max:255|unique:reporters',
-            'nid_no' => 'required|string|max:255|unique:reporters',
+            'email' => 'required|string|email|max:255',
+            'nid_no' => 'required|string|max:255',
             'father_name' => 'required|string|max:255',
             'mother_name' => 'required|string|max:255',
             'present_address' => 'required|string',
@@ -86,8 +86,8 @@ class NewsReporterController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
-            'email' => 'required|string|email|max:255|unique:reporters',
-            'nid_no' => 'required|string|max:255|unique:reporters',
+            'email' => 'required|string|email|max:255',
+            'nid_no' => 'required|string|max:255',
             'father_name' => 'required|string|max:255',
             'mother_name' => 'required|string|max:255',
             'present_address' => 'required|string',

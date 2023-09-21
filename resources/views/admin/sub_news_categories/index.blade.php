@@ -95,13 +95,13 @@
                                     <td>{{ $sub_news_category->name }}</td>
                                     <td><span class="badge rounded-pill bg-label-{{ $sub_news_category->status ? 'primary':'danger' }}">{{ $sub_news_category->status ? 'Active':'Deactive' }}</span></td>
                                     <td>
-                                        {{-- <div class="dropdown">
+                                        <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
                                                 data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu">
-                                                <a class="dropdown-item term-cat-modal" data-id="{{ $sub_news_category->id }}"
+                                                <a class="dropdown-item sub-news-category-modal" data-id="{{ $sub_news_category->id }}"
                                                     data-url="{{ route('admin.sub_news_categories.update', $sub_news_category->id) }}"
                                                     data-name="{{ $sub_news_category->name }}" data-status="{{ $sub_news_category->status }}" href="javascript:void(0);">
                                                     <i class="bx bx-edit-alt me-1"></i>
@@ -113,7 +113,7 @@
                                                     {{ __('Delete') }}
                                                 </a>
                                             </div>
-                                        </div> --}}
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -176,10 +176,10 @@
         </div>
     </div>
 
-    {{-- <div class="modal fade" id="term-cat-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="sub-news-category-modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
-                <form action="" method="post" class="custom-reload-form term-edit-form">
+                <form action="" method="post" class="custom-reload-form sub-news-category-edit-form">
                     @csrf
                     @method('put')
 
@@ -191,12 +191,12 @@
                         <div class="row">
                             <div class="mb-3">
                                 <label class="form-label">News Category</label>
-                                <select class="form-select" name="news_category_id">
+                                {{-- <select class="form-select" name="news_categories_id">
                                     <option>--Select One--</option>
                                     @foreach ($active_news_categories as $active_news_category)
-                                        <option {{ ($active_news_category->id == $product_info->news_category_id) ? "selected":"" }} value="{{ $active_news_category->id }}">{{ $active_news_category->name }}</option>
+                                        <option {{ ($active_news_category->id == $sub_news_categories->news_categories_id) ? "selected":"" }} value="{{ $active_news_category->id }}">{{ $active_news_category->name }}</option>
                                     @endforeach
-                                </select>
+                                </select> --}}
                             </div>
                             <div class="col-12 mb-3">
                                 <label for="name" class="form-label">name</label>
@@ -220,5 +220,5 @@
                 </form>
             </div>
         </div>
-    </div> --}}
+    </div>
 @endpush

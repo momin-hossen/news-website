@@ -47,7 +47,18 @@
     });
 
 
+    $(".sub-news-category-modal").on("click", function () {
+        var url = $(this).data("url");
+        var name = $(this).data("name");
+        var status = $(this).data("status");
+        $(".name").val(name);
+        $(".status").val(status);
+        $("#sub-news-category-modal").modal("show");
+        $(".sub-news-category-edit-form").attr("action", url);
+    });
+
     $(".skill-modal").on("click", function () {
+        var url = $(this).data("url");
         var name = $(this).data("name");
         var percent = $(this).data("percent");
         var status = $(this).data("status");
@@ -59,6 +70,7 @@
     });
 
     $(".service-modal").on("click", function () {
+        var url = $(this).data("url");
         var name = $(this).data("name");
         var status = $(this).data("status");
         $(".name").val(name);
@@ -68,6 +80,7 @@
     });
 
     $(".portfolio-modal").on("click", function () {
+        var url = $(this).data("url");
         var title = $(this).data("title");
         var status = $(this).data("status");
         $(".title").val(title);
@@ -77,6 +90,7 @@
     });
 
     $(".news-cat-modal").on("click", function () {
+        var url = $(this).data("url");
         var name = $(this).data("name");
         var status = $(this).data("status");
         $(".name").val(name);
@@ -87,6 +101,7 @@
 
 
     $(".experiences-modal").on("click", function () {
+        var url = $(this).data("url");
         var title = $(this).data("title");
         var date = $(this).data("date");
         var status = $(this).data("status");
@@ -100,6 +115,7 @@
     });
 
     $(".tagline-modal").on("click", function () {
+        var url = $(this).data("url");
         var name = $(this).data("name");
         var status = $(this).data("status");
         $(".name").val(name);
@@ -109,6 +125,7 @@
     });
 
     $(".special-modal").on("click", function () {
+        var url = $(this).data("url");
         var title = $(this).data("title");
         var status = $(this).data("status");
         $(".title").val(title);
