@@ -138,62 +138,6 @@
             </ul>
         </li>
 
-        <li class="menu-item {{ Route::is('admin.taglines.index') ? 'active' :'' }}">
-            <a href="{{ route('admin.taglines.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-question-mark"></i>
-                <div>{{ __('Tagline') }}</div>
-            </a>
-        </li>
-
-        <li class="menu-item {{ Route::is('admin.experiences.index') ? 'active' :'' }}">
-            <a href="{{ route('admin.experiences.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bxs-briefcase-alt-2"></i>
-                <div>{{ __('Experience') }}</div>
-            </a>
-        </li>
-
-        <li class="menu-item {{ Route::is('admin.skills.index') ? 'active' :'' }}">
-            <a href="{{ route('admin.skills.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-slider"></i>
-                <div>{{ __('Skill') }}</div>
-            </a>
-        </li>
-
-        <li class="menu-item {{ Route::is('admin.services.index') ? 'active' :'' }}">
-            <a href="{{ route('admin.services.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-laptop"></i>
-                <div>{{ __('Service') }}</div>
-            </a>
-        </li>
-
-        <li class="menu-item {{ Route::is('admin.portfolios.index') ? 'active' :'' }}">
-            <a href="{{ route('admin.portfolios.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bxs-id-card"></i>
-                <div>{{ __('Portfolio') }}</div>
-            </a>
-        </li>
-
-        <li class="menu-item {{ Route::is('admin.testimonials.*') ? 'active' :'' }}">
-            <a href="{{ route('admin.testimonials.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bxs-comment"></i>
-                <div>{{ __('Testimonial') }}</div>
-            </a>
-        </li>
-
-        <li class="menu-item {{ Route::is('admin.subscribers.index') ? 'active' :'' }}">
-            <a href="{{ route('admin.subscribers.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bxs-user-badge"></i>
-                <div>{{ __('Subscriber') }}</div>
-            </a>
-        </li>
-
-        <li class="menu-item {{ Route::is('admin.social_links.index') ? 'active' :'' }}">
-            <a href="{{ route('admin.social_links.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bxs-like"></i>
-                <div>{{ __('Social Link') }}</div>
-            </a>
-        </li>
-
         <li class="menu-item {{ Route::is('admin.news_categories.index') ? 'active' :'' }}">
             <a href="{{ route('admin.news_categories.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-news"></i>

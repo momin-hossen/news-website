@@ -11,14 +11,6 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin'], function () {
     Route::resource('tags', Admin\TagController::class)->except('create', 'show', 'edit');
     Route::resource('categories', Admin\CategoryController::class)->except('create', 'show', 'edit');
     Route::resource('pages', Admin\PageController::class)->except('show');
-    Route::resource('taglines', Admin\TaglineController::class);
-    Route::resource('experiences', Admin\ExperienceController::class);
-    Route::resource('skills', Admin\SkillController::class);
-    Route::resource('services', Admin\ServiceController::class);
-    Route::resource('portfolios', Admin\PortfolioController::class);
-    Route::resource('testimonials', Admin\TestimonialController::class);
-    Route::resource('subscribers', Admin\SubscriberController::class);
-    Route::resource('social_links', Admin\SocialLinkController::class);
     Route::resource('news_categories', Admin\NewsCategoryController::class);
     Route::resource('sub_news_categories', Admin\SubNewsCategoryController::class);
     Route::resource('news', Admin\NewsController::class);
